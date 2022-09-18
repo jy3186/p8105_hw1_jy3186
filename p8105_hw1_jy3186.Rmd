@@ -1,0 +1,70 @@
+---
+title: "p8105_hw1_jy3186"
+output: html_document
+date: "2022-09-18"
+---
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+install.packages("palmerpenguins")
+
+#Problem 1
+
+```{r}
+library(tidyverse)
+#load dataset
+
+data("penguins", package = "palmerpenguins")
+
+#find names of the variables
+names(penguins)
+
+#find values of the variables
+pull(penguins, flipper_length_mm)
+pull(penguins, bill_depth_mm)
+
+#find number of rows
+nrow(penguins)
+
+#find number of columns
+ncol(penguins)
+
+#find the mean of flipper length
+mean(pull(penguins, flipper_length_mm), na.rm = TRUE)
+
+#scatter plot of flipper_length_mm (y) vs bill_length_mm (x)
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species))+ geom_point()
+
+#save the scatter plot
+ggsave("scatter_plot.pdf")
+```
+
+#Problem 2
+```{r, message = FALSE, warning = FALSE}
+#create a data frame
+hw1_df = tibble(
+  #create a normal sample of size of 10
+  norm_samp = rnorm(10),
+  #elements of the sample are greater than 0
+  norm_samp_pos = norm_samp > 0,
+  #create a character vector of length 10
+  vec_char = c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"),
+  #create a factor vector of length 10, with 3 different factor “levels” 
+  vec_factor = factor(c("A", "A", "A", "B", "B", "B", "C", "C", "C", "C"), levels = c("A", "B", "C")),
+)
+#try to find the mean of each variable
+mean(pull(hw1_df, norm_samp))
+mean(pull(hw1_df, norm_samp_pos))
+mean(pull(hw1_df, vec_char))
+mean(pull(hw1_df, vec_factor))
+
+#The mean can be taken from logical vector but not character and factor vectors
+
+#try as.numeric
+as.numeric(pull(hw1_df, norm_samp))
+as.numeric(pull(hw1_df, norm_samp_pos))
+as.numeric(pull(hw1_df, vec_char))
+as.numeric(pull(hw1_df, vec_factor))
+
