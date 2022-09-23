@@ -19,16 +19,16 @@ library(tidyverse)
 ```{r, message = FALSE, warning = FALSE}
 data("penguins", package = "palmerpenguins")
 ```
-find names of the variables are `r names(penguins)`
+The names of the variables are `r names(penguins)`
 
 
-find number of rows:
+The number of rows:
 `r nrow(penguins)`
 
-find number of columns:
+The number of columns:
 `r ncol(penguins)`
 
-find the mean of flipper length:
+The mean of flipper length:
 `r mean(pull(penguins, flipper_length_mm), na.rm = TRUE)`
 
 #scatter plot of flipper_length_mm (y) vs bill_length_mm (x)
